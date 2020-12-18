@@ -61,18 +61,20 @@ The project was developed using:
 * Anaconda (conda)
 * Tweepy
 * Pymongo
+* Pandas
 
 Follow the steps below to setup the project.
 
 ### Create environment
 
-Create conda environemnt using the command:
+Create a conda environment using the command:
 ```
 conda create -n "env-name" python=3.7
 ```
 
 ### Activate environment
-Activate the your environment using the command:
+
+Activate the environment using the command:
 ```
 conda activate env-name
 ```
@@ -83,6 +85,13 @@ Install project packages using the command:
 ```
 pip install -r requirements.txt
 ```
+
+### Store env variables
+
+To store your access credentials (examples: API keys, Database access credentials), follow the steps below:  
+
+1. Duplicate *.env.example* file and create a new file names *.env*
+2. Store your access credentials as needed
 
 ## Resources
 
