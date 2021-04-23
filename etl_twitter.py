@@ -1,10 +1,15 @@
-import os
-import time
-from decouple import config
-import tweepy
-import pandas as pd
 import json
+import os
+import sys
+import time
+
+import pandas as pd
+import numpy as np
+import tweepy
+from decouple import UndefinedValueError, config
 from pymongo import MongoClient
+
+# TODO: change file name from etl_twitter to script.py
 
 class ETL:
     def __init__(self, api_obj:object):
@@ -94,12 +99,20 @@ class MongoDB:
 
 def main():
     # retrieve api keys
-    consumer_key = config('API-KEY')
-    consumer_secret = config('API-SECRET-KEY')
-    access_token = config('ACCESS-TOKEN')
-    access_token_secret = config('ACCESS-TOKEN-SECRET')
-
-    print("API access keys retrieved successfully.")
+    if (os.path.isfile(".env")):
+        try:
+            consumer_key = config('API-KEY')
+            consumer_secret = config('API-SECRET-KEY')
+            access_token = config('ACCESS-TOKEN')
+            access_token_secret = config('ACCESS-TOKEN-SECRET')
+        except UndefinedValueError as e:
+            print(e , "Check env file.")
+            sys.exit(-1)
+        else: 
+            print("API keys retrieved successfully.")
+    else: 
+        print("API keys cannot be retrieved. env file does not exist.")
+        sys.exit(-1)
 
     # authenticate user
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
